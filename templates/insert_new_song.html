@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <form action="/music/add_track" method="post" id="add_song">
+        {% csrf_token %}
+        <div class="col-md-8">
+            {{ song_form }}
+        </div>
+        <div class="col-md-5">
+            <h4>Select author</h4>
+            <p>
+                <select name="author" id="album" onclick="authorSelected()">
+                {% for author in authors %}
+                    <option value = "{{ author.id}}">{{ author.name }}</option>
+                {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h4>Select album</h4>
+            <p>
+                <select name="album" id="singer">
+                </select>
+                <input type="submit" value="OK" />
+            </p>
+        </div>
+    </form>
+
+    <script>
+        function authorSelected(){
+            event.preventDefault()
+            console.log($('#album').val())
+            csrfSafeMethod(create_post())
+        }
+{#        $('#add_song').on('submit', function(event){#}
+{#            event.preventDefault()#}
+{#            window.alert('asd')#}
+{#            console.log($('#album').val())#}
+{#            csrfSafeMethod(create_post())#}
+{#        })#}
+        function create_post() {
+            console.log("create post is working!") // sanity check
+            $.ajax({
+
+                url : "async_request", // the endpoint
+                type : "POST", // http method
+                data : { the_post : $('#album').val() , is_requested: "False"}, // data sent with the post request
+
+                // handle a successful response
+
+                success : function(json) {
+                    var text = ""
+                    var songs = json["the_post"]
+
+                    for (var i = 0; i< songs.length; i++){
+                        text += "<option value = '"+ songs[i]["_id"] +"'>" +  songs[i]["name"] + "</option>"
+                    }
+                    $("#singer")[0].innerHTML =  text
+                    console.log(json); // log the returned json to the console
+                    console.log("success"); // another sanity check
+                },
+
+                // handle a non-successful response
+                error : function(xhr,errmsg,err) {
+                    $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+        };
+        function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/request_remove/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+        });
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+{% endblock %}

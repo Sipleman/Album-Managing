@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Album</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Add to basket</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            {% for album in albums %}
+              <tr>
+                <td> <a href="{% url 'album_overview' album_id=album.id%}"> {{ album.name }} </a></td>
+                <td> {{ album.author }}</td>
+                <td> {{ album.price }}</td>
+                <td>
+                    <form action="/music/" method="POST">
+                        {% csrf_token %}
+                        <input type="submit"  name="Add to basket",
+                                value='Remove'/>
+                        <input type="hidden" name="album_id"
+                                   value={{ album.id_author }} />
+                    </form>
+
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <form action="/music/mainpage" method="POST">
+        {% csrf_token %}
+
+            <input type="submit"  name="Add to basket",
+                                value='Back' />
+    </form>
+
+{% endblock %}

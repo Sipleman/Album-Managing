@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <div class="container">
+        <table class = "table table-hover">
+            <thead>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Duration</th>
+                 <th>Album Name</th>
+                 <th>Price</th>
+                 <th>Singer</th>
+            </thead>
+            <tbody>
+                 {% for track in tracks %}
+                 <tr>
+                       <td>{{ forloop.counter }}</td>
+                       <td>{{ track.name }}</td>
+                       <td>{{ track.duration }}</td>
+                       <td>{{ track.album }}</td>
+                       <td>{{ track.price }}</td>
+                       <td>{{ track.author}}</td>
+                 </tr>
+                 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

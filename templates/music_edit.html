@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h4> {{ msg }} </h4>
+<form action="/music/edit/" method="post">
+    {% csrf_token %}
+    {{ song_form }}
+
+{#    <table>#}
+{#        <tr><td>Singer name:</td>#}
+{#            <td>#}
+{#                <select name="dropdown1">#}
+{#                    {% for singer in singers %}#}
+{#                        <option value = "{{ singer.name}}">{{ singer.name }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </td>#}
+{#        </tr>#}
+{#    </table>#}
+
+    <input type="submit" value="OK">
+</form>
+
+{% endblock %}

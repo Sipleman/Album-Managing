@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="container">
+      <h3>{{ album.name }}</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Track</th>
+            <th>Duration</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for track in tracks %}
+              <tr>
+                <td> {{ track.name }} </td>
+                <td> {{ album.author }} </td>
+                <td> {{ track.price }} </td>
+                <td> {{ track.duration }} </td>
+                <td>
+                    <form action="/music/edit/" method="GET">
+                        {% csrf_token %}
+                        <input type="submit"  name="track",
+                                value="Edit" />
+                        <input type="hidden" name="track_id"
+                               value={{ track.id }} />
+                    </form>
+
+                </td>
+                <td>
+                    <form action="/music/remove/" method="POST" id="remove_track">
+                        {% csrf_token %}
+                        <input type="submit"  name="track",
+                                value="Remove" />
+                        <input type="hidden" name="track_id"
+                               value={{ track.id }} />
+                    </form>
+
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

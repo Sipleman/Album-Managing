@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Music>
+    <Albums>
+        <album album_id="1" album_name="Destiny" genre="HardRock" year="1998" numberOfSongs="13" id_singer="1"/>
+        <album album_id="2" album_name="Galua" genre="HardRock" year="2000" numberOfSongs="12" id_singer="2"/>
+        <album album_id="3" album_name="Fibonachi" genre="HardRock" year="2002" numberOfSongs="11" id_singer="1"/>
+    </Albums>
+    <Songs>
+        <song id="1" name="Jazz Of Your" id_album = "1" duration="3-14" size="3.14Mb"  id_singer="1"/>
+        <song id="2" name="Sweet Home" id_album="2" duration="3-15" size="3.65Mb" id_singer="2"/>
+        <song id="3" name="Jorodio" id_album = "1" duration="4-15" size="4.15Mb" id_singer="1"/>
+        <song id="1" name="Jokio" id_album="1" duration="5-10" size="5.2Mb" id_singer="1"/>
+        <song id="4" name="Jokolo" id_album="1" duration="3-14" size="3Mb" id_singer="1"/>
+        <song id="4" name="Joker" id_album="1" duration="3-14" size="3Mb" id_singer="1"/>
+        <song id="4" name="Student" id_album="2" duration="3-14" size="3Mb" id_singer="2"/>
+        <song id="4" name="Liki" id_album="1" duration="3-14" size="3Mb" id_singer="1"/>
+        <song id="4" name="Kikolo" id_album="2" duration="3-14" size="3Mb" id_singer="1"/>
+    </Songs>
+    <Singers>
+        <singer id_singer="1" name="Lynhard Skynrd" lastName="-" birthday="1984"/>
+        <singer id_singer="2" name="100 Wat Vipers" lastName="-" birthday="1998"/>
+        <singer id_singer="3" name="Blind Guardian" lastName="-" birthday="1982"/>
+    </Singers>
+</Music>

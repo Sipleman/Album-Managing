@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{%  block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/music/search/{{ msg.type }}" method="POST">
+            {% csrf_token %}
+            <label for="duration_value">{{ msg.msg }} </label>
+            <input id="duration_value" type="text" name="value">
+            <select name="types">
+                <option value="gt">Greater than</option>
+                <option value="lt">Lower than</option>
+            </select>
+            <input type="submit" value="OK">
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4>{{ msg.count }}</h4>
+    </div>
+
+</div>
+{#<h3>Boolean Mode</h3>#}
+{#<form action="/music/boolean_search/" method="post">#}
+{#    {% csrf_token %}#}
+{#    <div class="row">#}
+{#        <div class="col-md-6">#}
+{#            <label for="value">Enter phrase: </label>#}
+{#            <input id="value" type="text" name="value_bool" value="{{ from }}">#}
+{#        </div>#}
+{#    </div>#}
+{#    <input type="submit" value="OK">#}
+{#</form>#}
+
+{%  endblock %}

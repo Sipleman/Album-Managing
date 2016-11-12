@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4>Albums</h4>
+        <a href="albums_select" class="btn btn-info" role="button">Show albums</a>
+
+
+        <h4>Insert new track</h4>
+        <a href="insert" class="btn btn-info" role="button">Insert song</a>
+    </div>
+
+    <div class="col-sm-4">
+        <h4>Insert track</h4>
+        <a href="insert/" class="btn btn-info" role="button"> Insert</a>
+    </div>
+    <div class="col-sm-4">
+        <h4>Music list</h4>
+         <a href="musiclist/" class="btn btn-info" role="button"> List </a>
+    </div>
+    <div class="col-sm-4">
+         <h4>Search</h4>
+        <div class="container">
+         <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Search
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="search/price">By price</a></li>
+                <li><a href="search/duration">By duration</a></li>
+              </ul>
+         </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

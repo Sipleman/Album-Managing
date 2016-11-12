@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col-lg-12" id="msg" >
+        <h4>{{ msg }}</h4>
+            <a href="{% url 'homepage' %}" class="btn-lg">Back to main page</a>
+    </div>
+{% endblock %}

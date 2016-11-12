@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<form action="/music/insert2/" method="post">
+        {% csrf_token %}
+
+    <div class="row">
+        <div class = "col-md-6">
+        <label for="name">Your name: </label>
+            <input id="name" type="text" name="name" value="{{ current_name }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="size">Size: </label>
+            <input id="size" type="text" name="size" value="{{ current_size }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="duration">Duration: </label>
+            <input id="duration" type="text" name="duration" value="{{ current_duration }}">
+        </div>
+    </div>
+    <table>
+        <tr><td>Singer name:</td>
+            <td>
+                <select name="dropdown1">
+                    {% for singer in singers %}
+                        <option value = "{{ singer.name}}">{{ singer.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="OK">
+</form>
+</body>
