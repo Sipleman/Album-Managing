@@ -84,7 +84,7 @@ class DB(object):
 
     def get_album_price(self, album_name):
         value = list(self.db.album.aggregate([
-                                    {"$match": {'songs.name': "Sweet Home Alabama"}},
+                                    {"$match": {'name': album_name}},
                                     {"$unwind": '$songs'},
                                     {"$group": {'_id': '$songs._id', "price": {"$first": "$songs.price"}}},
                                     {"$group": {'_id': "album_price", "total": {"$sum": "$price"}}}
@@ -143,7 +143,8 @@ class DB(object):
 
     def add_track(self, song_name, duration, price, id_album, id_singer=0):
         with self.con:
-            song = {"_id": ObjectId(), "name": song_name, "album_id": ObjectId(id_album), "price": price, "duration":duration}
+            song = {"_id": ObjectId(), "name": song_name, "album_id": ObjectId(id_album), "price": price,
+                    "duration":duration, "author_id": ObjectId(id_singer)}
             return self.db.album.update({"_id": ObjectId(id_album)}, {"$addToSet": {"songs": song}})
             # return True
         return False

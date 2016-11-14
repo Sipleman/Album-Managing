@@ -239,7 +239,7 @@ def thanks(request):
 def add_track(request):
     if request.method == 'POST':
         form = request.POST
-        print db.add_track(form['name'], form['duration'], form['price'], request.POST['album'])
+        print db.add_track(form['name'], form['duration'], form['price'], request.POST['album'], request.POST['author'])
         return HttpResponseRedirect('/music/musiclist/')
     else:
         album_id = request.POST["album"]

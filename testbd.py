@@ -1,22 +1,18 @@
-from bson import Code
+import bson
 from pymongo import MongoClient
 
 client = MongoClient()
 db = client.music_db
 price = "1"
-map = Code("db.album.mapReduce( "
-                   "                    function(){"
-                   "    for(var i=0 in this.songs){"
-                   "        if(this.songs[i].price>"+price+"){"
-                   "            emit(this.songs[i].price, 1);"
-                   "            }"
-                   "        }"
-                   "    }")
-reduce = Code("function(key, values){"
-                   "    var sum = 0;"
-                   "    for( var i=0 in values){"
-                   "        sum+=values[i];"
-                   "        }"
-                   "    return sum;"
-                   "    }")
-db.album.map_reduce(map, reduce, "myresult")
+
+
+def update_price(name):
+
+    songs = db.album.find({"name": name})[0]["songs"]
+    for song in songs:
+        song['price'] = 1.29
+
+    db.album.update({"name": name}, {"$set": {"songs": songs}})
+    print db.album.find({"name": name})[0]
+
+update_price("Second Helping")
